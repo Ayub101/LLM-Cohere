@@ -41,6 +41,7 @@ st.title("Document Question Answering")
 
 option = st.selectbox("Input type", ["TEXT BOX","PDF"])
 df = None
+data=False
 if option == "CSV":
     train_file = st.file_uploader(
         'Upload File (Single column CSV with a header called "text")', type=["csv"],
@@ -54,6 +55,7 @@ elif option == "TEXT BOX":
     text = st.text_area("Paste the Document", height=250)
     if text != "":
         df, _, _, _ = process_text_input(text)
+        data = True
 elif option == "PDF":
     train_file = st.file_uploader(
         'Upload File', type=["pdf"],accept_multiple_files=True
@@ -62,9 +64,9 @@ elif option == "PDF":
     if train_file is not None:
         df, _, _, _ = read_pdf_data(train_file)
         df, _, _, _ = process_text_input(df)
+        data = True
 
-if df is not None:
-    print(df)
+if df is not None and data:
     embeddings = get_embeddings_from_df(df)
 
 if df is not None:
