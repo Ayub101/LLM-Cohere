@@ -40,7 +40,7 @@ def generate(prompt, max_tokens=None):
 st.title("Document Question Answering")
 
 option = st.selectbox("Input type", ["TEXT BOX","PDF"])
-df = "EMPTY"
+df = None
 data=False
 if option == "CSV":
     train_file = st.file_uploader(
@@ -66,10 +66,10 @@ elif option == "PDF":
         df, _, _, _ = process_text_input(df)
         data = True
 
-if df!="EMPTY":
+if df is not None:
     embeddings = get_embeddings_from_df(df)
 
-if df !="EMPTY":
+if df is not None:
     prompt = st.text_input("Ask a question")
     advanced_options = st.checkbox("Advanced options")
     if advanced_options:
