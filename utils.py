@@ -54,10 +54,10 @@ def process_text_input(text: str, run_id: str = None):
 
 
 def embed_stuff(list_of_texts):
-    if len(list_of_texts)<2:
-        return
-    response = co_client.embed(model="small", texts=list_of_texts)
-    return response.embeddings
+    if list_of_texts:
+        response = co_client.embed(model="small", texts=list_of_texts)
+        return response.embeddings
+    return 
 
 
 def get_embeddings_from_df(df):
