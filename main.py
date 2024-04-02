@@ -80,7 +80,7 @@ if df is not None:
             "max_tokens", min_value=1, max_value=1000, value=MAX_TOKENS
         )
 
-if df!="EMPTY" and prompt != "":
+if df is not None and prompt != "":
     base_prompt = "Based on the passage above, answer the following question:"
     prompt_embedding = embed_stuff([prompt])
     aug_prompts = get_augmented_prompts(np.array(prompt_embedding), embeddings, df)
