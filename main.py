@@ -66,7 +66,7 @@ elif option == "PDF":
         df, _, _, _ = process_text_input(df)
         data = True
 
-if df is not None and data:
+if df is not None and data and df!='':
     embeddings = get_embeddings_from_df(df)
 
 if df is not None:
