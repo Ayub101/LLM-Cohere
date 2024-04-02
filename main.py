@@ -40,7 +40,7 @@ def generate(prompt, max_tokens=None):
 st.title("Document Question Answering")
 
 option = st.selectbox("Input type", ["TEXT BOX","PDF"])
-df = None
+df = "EMPTY"
 data=False
 if option == "CSV":
     train_file = st.file_uploader(
@@ -66,10 +66,10 @@ elif option == "PDF":
         df, _, _, _ = process_text_input(df)
         data = True
 
-if df is not None:
+if df!="EMPTY":
     embeddings = get_embeddings_from_df(df)
 
-if df is not None:
+if df !="EMPTY":
     prompt = st.text_input("Ask a question")
     advanced_options = st.checkbox("Advanced options")
     if advanced_options:
@@ -80,7 +80,7 @@ if df is not None:
             "max_tokens", min_value=1, max_value=1000, value=MAX_TOKENS
         )
 
-if df is not None and prompt != "":
+if df!="EMPTY" and prompt != "":
     base_prompt = "Based on the passage above, answer the following question:"
     prompt_embedding = embed_stuff([prompt])
     aug_prompts = get_augmented_prompts(np.array(prompt_embedding), embeddings, df)
