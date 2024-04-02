@@ -9,7 +9,7 @@ import cohere
 from numpy.linalg import norm
 from pypdf import PdfReader
 
-co_client = cohere.Client("f7AEPsReJcvV7PXbOnoY4wLXo4bBjg45Kady53C0")
+co_client = cohere.Client("n7KOlmccetUMNu1uaXET7vSRMNTfIyCa9XynEHVO")
 CHUNK_SIZE = 1024
 OUTPUT_BASE_DIR = "./"
 
