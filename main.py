@@ -39,7 +39,7 @@ def generate(prompt, max_tokens=None):
 
 st.title("Document Question Answering")
 
-option = st.selectbox("Input type", ["TEXT BOX","PDF"])
+option = st.selectbox("Input type", ["PDF","TEXT BOX"])
 df = None
 data=False
 if option == "CSV":
