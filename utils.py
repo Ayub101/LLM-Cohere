@@ -8,11 +8,12 @@ import numpy as np
 import cohere
 from numpy.linalg import norm
 from pypdf import PdfReader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 co_client = cohere.Client("n7KOlmccetUMNu1uaXET7vSRMNTfIyCa9XynEHVO")
 CHUNK_SIZE = 1024
 OUTPUT_BASE_DIR = "./"
-
+REC_TEXT_SPLITTER = RecursiveCharacterTextSplitter(chunk_size=400,chunk_overlap=0,length_function=len)
 
 def get_random_string(length: int = 10):
     letters = string.ascii_letters
@@ -44,7 +45,8 @@ def process_pdf_file(st_file_objects: Any, run_id: str = None):
 
 def process_text_input(text: str, run_id: str = None):
     text = StringIO(text).read()
-    chunks = [text[i: i + CHUNK_SIZE] for i in range(0, len(text), CHUNK_SIZE)]
+    #chunks = [text[i: i + CHUNK_SIZE] for i in range(0, len(text), CHUNK_SIZE)]
+    chunks = REC_TEXT_SPLITTER.split_text(text)
     df = pd.DataFrame.from_dict({"text": chunks})
     run_id = get_random_string() if run_id is None else run_id
 
@@ -54,10 +56,8 @@ def process_text_input(text: str, run_id: str = None):
 
 
 def embed_stuff(list_of_texts):
-    if list_of_texts:
-        response = co_client.embed(model="small", texts=list_of_texts)
-        return response.embeddings
-    return 
+    response = co_client.embed(model="small", texts=list_of_texts)
+    return response.embeddings
 
 
 def get_embeddings_from_df(df):
