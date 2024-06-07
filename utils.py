@@ -10,7 +10,7 @@ from numpy.linalg import norm
 from pypdf import PdfReader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
-co_client = cohere.Client("n7KOlmccetUMNu1uaXET7vSRMNTfIyCa9XynEHVO")
+co_client = cohere.Client("zaSCMxSPkAN7Yjn0inBc1RcbRvU8SEkIHSpDu9ch")
 CHUNK_SIZE = 1024
 OUTPUT_BASE_DIR = "./"
 REC_TEXT_SPLITTER = RecursiveCharacterTextSplitter(chunk_size=400,chunk_overlap=0,length_function=len)
