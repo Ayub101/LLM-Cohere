@@ -3,5 +3,5 @@ numpy
 pandas
 streamlit
 pypdf
-langchain 0.0.27
+langchain: 0.0.27
 --upgrade pip
